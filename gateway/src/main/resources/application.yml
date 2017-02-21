@@ -1,0 +1,27 @@
+server:  
+  port: ${PORT:8765}
+
+spring:  
+  application:
+    name: gateway-server
+
+logging:
+  level:
+    org.springframework.cloud.netflix.zuul: TRACE
+      
+zuul:
+  routes:
+    uaa:
+      path: /uaa/**
+      sensitiveHeaders:
+      serviceId: auth-server
+    account:
+      path: /account/**
+      sensitiveHeaders: 
+      serviceId: account-service
+      
+eureka:
+  client:
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
