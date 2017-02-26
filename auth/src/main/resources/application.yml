@@ -4,12 +4,18 @@ server:
 spring:  
   application:
     name: auth-server
-
+  datasource:
+    url: jdbc:mysql://192.168.99.100:33306/default?useSSL=false
+    username: default
+    password: default
+    
 logging:
   level:
     org.springframework.security: TRACE
       
 security:
+#  basic:
+#    enabled: false
   user:
     name: root
     password: password
