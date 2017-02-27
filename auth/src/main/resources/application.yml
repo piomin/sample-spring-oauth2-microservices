@@ -5,7 +5,7 @@ spring:
   application:
     name: auth-server
   datasource:
-    url: jdbc:mysql://192.168.99.100:33306/default?useSSL=false
+    url: jdbc:mysql://192.168.99.100:33306/oauth2?useSSL=false
     username: default
     password: default
     

@@ -33,6 +33,7 @@
 	<modules>
 		<module>auth</module>
 		<module>account</module>
+		<module>customer</module>		
 		<module>discovery</module>
 		<module>gateway</module>
 	</modules>

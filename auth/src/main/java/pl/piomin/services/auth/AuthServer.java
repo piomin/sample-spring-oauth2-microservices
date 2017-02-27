@@ -34,7 +34,7 @@ public class AuthServer {
 
 	@Bean
 	public DataSource dataSource() {
-		return DataSourceBuilder.create().url("jdbc:mysql://192.168.99.100:33306/default?useSSL=false")
+		return DataSourceBuilder.create().url("jdbc:mysql://192.168.99.100:33306/oauth2?useSSL=false")
 				.username("default").password("default").driverClassName("com.mysql.jdbc.Driver").build();
 	}
 

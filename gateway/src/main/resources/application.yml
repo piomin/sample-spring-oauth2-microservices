@@ -5,7 +5,7 @@ spring:
   application:
     name: gateway-server
   datasource:
-    url: jdbc:mysql://192.168.99.100:33306/default?useSSL=false
+    url: jdbc:mysql://192.168.99.100:33306/oath2?useSSL=false
     username: default
     password: default
 
@@ -23,7 +23,11 @@ zuul:
       path: /account/**
       sensitiveHeaders: 
       serviceId: account-service
-      
+    customer:
+      path: /customer/**
+      sensitiveHeaders: 
+      serviceId: customer-service
+            
 eureka:
   client:
     registerWithEureka: false
@@ -43,7 +47,13 @@ security:
       userInfoUri: http://localhost:8765/uaa/user
       preferTokenInfo: false  
   sessions: ALWAYS 
-    
+
+proxy:
+  auth:
+    routes:
+      customer: oauth2
+      account: oauth2
+          
 #security:
 #  oauth2:
 #    sso:

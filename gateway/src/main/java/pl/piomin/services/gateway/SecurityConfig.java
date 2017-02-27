@@ -15,8 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Order(-10)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//	@Autowired
-//	private DataSource dataSource;
+	@Autowired
+	private DataSource dataSource;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -32,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.jdbcAuthentication().dataSource(dataSource);
-		auth.inMemoryAuthentication().withUser("root").password("password").roles("USER");
+		auth.jdbcAuthentication().dataSource(dataSource);
+//		auth.inMemoryAuthentication().withUser("root").password("password").roles("USER");
 	}
 	
 }

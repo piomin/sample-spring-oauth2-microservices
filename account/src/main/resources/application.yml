@@ -10,13 +10,13 @@ logging:
     org.springframework.security: TRACE
       
 security:
-  user:
-    name: root
-    password: password
+#  user:
+#    name: root
+#    password: password
   oauth2:
     resource:
 #      loadBalanced: true
-      userInfoUri: http://localhost:9998/user
+      userInfoUri: http://localhost:9999/user
       
 eureka:
   client:
