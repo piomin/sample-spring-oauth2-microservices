@@ -11,14 +11,13 @@ logging:
       
 security:
   user:
-    name: root
-    password: password
+    password: none
   oauth2:
+    client:
+      client-id: web
+      client-secret: secret
+      scope: read
+      access-token-uri: http://localhost:9999/oauth/token
+      user-authorization-uri: http://localhost:9999/oauth/authorize
     resource:
-#      loadBalanced: true
-      userInfoUri: http://localhost:9998/user
-      
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      token-info-uri: http://localhost:9999/oauth/check_token
