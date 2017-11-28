@@ -5,26 +5,13 @@ spring:
   application:
     name: auth-server
   datasource:
-    url: jdbc:mysql://192.168.99.100:33306/default?useSSL=false
-    username: default
-    password: default
+    url: jdbc:mysql://192.168.99.100:33306/oauth2?useSSL=false
+    username: oauth2
+    password: oauth2
+    driver-class-name: com.mysql.jdbc.Driver
+    schema: classpath:/script/schema.sql
+    data: classpath:/script/data.sql
     
 logging:
   level:
-    org.springframework.security: TRACE
-      
-security:
-#  basic:
-#    enabled: false
-  user:
-    name: root
-    password: password
-  oauth2:
-    client:
-      client-id: acme
-      client-secret: secret
-      
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+    org.springframework.security: DEBUG

@@ -1,36 +1,47 @@
 package pl.piomin.services.auth;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
-@Order(-10)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	// @Autowired
-	// private DataSource dataSource;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-//		http.sessionManagement().
-//		http.authorizeRequests().antMatchers("/**").permitAll();
-		http.authorizeRequests().anyRequest().authenticated();
-//		and().formLogin().loginPage("/login").permitAll().and().httpBasic().disable();
-	}
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        return new ShaPasswordEncoder(256);
+    }
 
-	// @Override
-	// public void configure(AuthenticationManagerBuilder auth) throws Exception
-	// {
-	// auth.jdbcAuthentication().dataSource(dataSource);
-	// auth.inMemoryAuthentication().withUser("root").password("password").roles("USER");
-	// }
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    	auth
+        	.userDetailsService(userDetailsService)
+        	.passwordEncoder(passwordEncoder());
+    }
+    
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+    	web.ignoring().antMatchers("/auth/**");
+    }
+    
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() 
+      throws Exception {
+        return super.authenticationManagerBean();
+    }
 
 }
