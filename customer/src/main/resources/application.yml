@@ -1,13 +1,9 @@
 server:  
-  port: ${PORT:8081}
+  port: ${PORT:8082}
 
 spring:  
   application:
-    name: account-service
-
-logging:
-  level:
-    org.springframework.security: TRACE
+    name: customer-service
       
 security:
   user:
