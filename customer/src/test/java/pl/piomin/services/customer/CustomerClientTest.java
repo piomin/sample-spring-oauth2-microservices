@@ -1,4 +1,4 @@
-package pl.piomin.services.account;
+package pl.piomin.services.customer;
 
 import java.util.Arrays;
 
@@ -8,9 +8,9 @@ import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 
-import pl.piomin.services.account.model.Account;
+import pl.piomin.services.customer.model.Customer;
 
-public class AccountClientTest {
+public class CustomerClientTest {
 
 	@Test
 	public void testClient() {
@@ -18,15 +18,15 @@ public class AccountClientTest {
         resourceDetails.setUsername("piomin");
         resourceDetails.setPassword("piot123");
         resourceDetails.setAccessTokenUri("http://localhost:9999/oauth/token");
-        resourceDetails.setClientId("account-service");
+        resourceDetails.setClientId("customer-service");
         resourceDetails.setClientSecret("secret");
         resourceDetails.setGrantType("password");
         resourceDetails.setScope(Arrays.asList("read"));
         DefaultOAuth2ClientContext clientContext = new DefaultOAuth2ClientContext();
         OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(resourceDetails, clientContext);
         restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
-        final Account account = restTemplate.getForObject("http://localhost:8082/{id}", Account.class, 1);
-        System.out.println(account);
+        final Customer customer = restTemplate.getForObject("http://localhost:8083/{id}", Customer.class, 1);
+        System.out.println(customer);
 	}
 	
 }

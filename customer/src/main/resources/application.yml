@@ -1,5 +1,5 @@
 server:  
-  port: ${PORT:8082}
+  port: ${PORT:8083}
 
 spring:  
   application:
@@ -10,7 +10,7 @@ security:
     password: none
   oauth2:
     client:
-      client-id: web
+      client-id: customer-service
       client-secret: secret
       scope: read
       access-token-uri: http://localhost:9999/oauth/token
