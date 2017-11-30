@@ -19,37 +19,34 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
-	private DataSource dataSource;	
+	private DataSource dataSource;
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints
-			.authenticationManager(this.authenticationManager)
-			.tokenStore(tokenStore())
-			.accessTokenConverter(accessTokenConverter());	
+		endpoints.authenticationManager(this.authenticationManager).tokenStore(tokenStore())
+				.accessTokenConverter(accessTokenConverter());
 	}
-	
+
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
 		oauthServer.checkTokenAccess("permitAll()");
 	}
 
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-        return new JwtAccessTokenConverter();
-    }
-    
+	@Bean
+	public JwtAccessTokenConverter accessTokenConverter() {
+		return new JwtAccessTokenConverter();
+	}
+
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.jdbc(dataSource);
 	}
 
-		
 	@Bean
 	public JdbcTokenStore tokenStore() {
 		return new JdbcTokenStore(dataSource);
 	}
-	
+
 }
