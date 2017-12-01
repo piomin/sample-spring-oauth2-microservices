@@ -13,11 +13,5 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     @Query
     User findByEmail(String email);
-
-    @Query
-    User findByEmailAndActivationKey(String email, String activationKey);
-
-    @Query
-    User findByEmailAndResetPasswordKey(String email, String resetPasswordKey);
     
 }
